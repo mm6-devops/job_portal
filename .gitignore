@@ -1,0 +1,34 @@
+# ── Node.js ──────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+
+# ── Environment / Secrets ─────────────────
+.env
+.env.local
+.env.development
+.env.production
+
+# ── OS / Editor ──────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# ── Installers / Binaries ─────────────────
+*.msi
+*.exe
+*.dmg
+*.pkg
+
+# ── Logs ─────────────────────────────────
+logs/
+*.log
+
+# ── Misc ─────────────────────────────────
+*.tgz
+*.zip
