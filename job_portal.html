@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerNest – Find Your Dream Job in India</title>
+  <meta name="description"
+    content="CareerNest is India's premier job portal connecting talented professionals with world-class companies. Browse thousands of jobs across Technology, Finance, Design and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <div class="logo" onclick="showPage('home')" role="button" tabindex="0" aria-label="CareerNest Home">
+        Career<span>Nest</span></div>
+      <div class="nav-links" id="nav-links">
+        <a onclick="showPage('home')" id="nav-home" class="active" role="button" tabindex="0">Home</a>
+        <a onclick="showPage('jobs')" id="nav-jobs" role="button" tabindex="0">Find Jobs</a>
+        <a onclick="showPage('companies')" id="nav-companies" role="button" tabindex="0">Companies</a>
+        <a onclick="showPage('dashboard')" id="nav-dashboard" role="button" tabindex="0">My Applications</a>
+        <a onclick="showPage('admin')" id="nav-admin" role="button" tabindex="0">Admin</a>
+      </div>
+      <div class="nav-auth-area">
+        <div class="nav-auth" id="nav-auth">
+          <button class="btn-outline" onclick="showPage('admin')" id="btn-post-job">Post a Job</button>
+          <button class="btn-outline" onclick="showPage('login')" id="btn-login">Login</button>
+          <button class="btn-primary" onclick="showPage('signup')" id="btn-signup">Sign Up</button>
+        </div>
+        <div class="nav-user" id="nav-user">
+          <div class="user-avatar" id="user-avatar">U</div>
+          <span class="user-name-display" id="user-name"></span>
+          <button class="btn-outline btn-sm" onclick="logout()" id="btn-logout">Logout</button>
+        </div>
+      </div>
+      <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileNav()" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ==================== HOME PAGE ==================== -->
+  <div class="page active" id="page-home">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-dots"></div>
+      <div class="hero-grid-line"></div>
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          ✦ 2,400+ Active Job Listings
+        </div>
+        <h1>Find Your <em>Dream</em><br>Career Today</h1>
+        <p>Connect with top companies across India. From startups to Fortune 500 — your next opportunity is waiting.</p>
+        <div class="hero-search" id="hero-search-box">
+          <div class="hero-search-icon">🔍</div>
+          <input type="text" id="hero-search-input" placeholder="Job title, skill, or company..." autocomplete="off" />
+          <div class="hero-search-divider"></div>
+          <select id="hero-search-loc" aria-label="Filter by location">
+            <option value="">All Locations</option>
+            <option>Pune</option>
+            <option>Mumbai</option>
+            <option>Bangalore</option>
+            <option>Delhi NCR</option>
+            <option>Hyderabad</option>
+            <option>Chennai</option>
+            <option>Remote</option>
+          </select>
+          <button class="btn-search" onclick="doHeroSearch()" id="btn-hero-search">Search Jobs</button>
+        </div>
+        <div class="hero-tags">
+          <span class="hero-tag-label">Popular:</span>
+          <button class="hero-quick-tag" onclick="quickSearch('React Developer')">React Developer</button>
+          <button class="hero-quick-tag" onclick="quickSearch('Data Scientist')">Data Scientist</button>
+          <button class="hero-quick-tag" onclick="quickSearch('Product Manager')">Product Manager</button>
+          <button class="hero-quick-tag" onclick="quickSearch('UX Designer')">UX Designer</button>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <strong id="stat-jobs">0</strong>
+            <span>Active Jobs</span>
+          </div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat">
+            <strong id="stat-companies">0</strong>
+            <span>Companies</span>
+          </div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat">
+            <strong>12,400+</strong>
+            <span>Placed This Year</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="floating-card fc-1">
+          <div class="fc-top">
+            <div class="fc-logo" style="background:rgba(108,99,255,0.2);color:#6C63FF;">G</div>
+            <div class="fc-info">
+              <strong>Senior React Developer</strong>
+              <span>Google India · Bangalore</span>
+            </div>
+          </div>
+          <div class="fc-tags">
+            <span class="tag green">₹28–40 LPA</span>
+            <span class="tag gold">Full-time</span>
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+          </div>
+        </div>
+        <div class="floating-card fc-2">
+          <div class="fc-top">
+            <div class="fc-logo" style="background:rgba(78,205,196,0.2);color:#4ECDC4;">I</div>
+            <div class="fc-info">
+              <strong>Data Science Manager</strong>
+              <span>Infosys · Pune</span>
+            </div>
+          </div>
+          <div class="fc-tags">
+            <span class="tag green">₹22–32 LPA</span>
+            <span class="tag gold">Hybrid</span>
+            <span class="tag">Python</span>
+            <span class="tag">ML</span>
+          </div>
+        </div>
+        <div class="floating-card fc-3">
+          <div class="fc-top">
+            <div class="fc-logo" style="background:rgba(255,107,107,0.2);color:#FF6B6B;">Z</div>
+            <div class="fc-info">
+              <strong>Full Stack Intern</strong>
+              <span>Zomato · Remote</span>
+            </div>
+          </div>
+          <div class="fc-tags">
+            <span class="tag green">₹50–80k/mo</span>
+            <span class="tag gold">Internship</span>
+            <span class="tag">Node.js</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED JOBS -->
+    <div class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-tag">Opportunities</div>
+          <div class="section-title">Featured Jobs</div>
+          <div class="section-sub">Hand-picked opportunities from top companies</div>
+        </div>
+        <button class="btn-outline" onclick="showPage('jobs')" id="btn-view-all-jobs">View All Jobs →</button>
+      </div>
+      <div class="filters" id="home-filters" role="group" aria-label="Filter jobs by category">
+        <button class="filter-btn active" onclick="filterHome(this,'all')" id="filter-all">All</button>
+        <button class="filter-btn" onclick="filterHome(this,'Technology')" id="filter-tech">Technology</button>
+        <button class="filter-btn" onclick="filterHome(this,'Finance')" id="filter-finance">Finance</button>
+        <button class="filter-btn" onclick="filterHome(this,'Marketing')" id="filter-marketing">Marketing</button>
+        <button class="filter-btn" onclick="filterHome(this,'Design')" id="filter-design">Design</button>
+        <button class="filter-btn" onclick="filterHome(this,'Human Resources')" id="filter-hr">HR</button>
+      </div>
+      <div class="jobs-grid" id="featured-jobs" aria-label="Featured job listings">
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+      </div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <div class="section how-section">
+      <div class="section-header centered">
+        <div>
+          <div class="section-tag">Simple Process</div>
+          <div class="section-title">How CareerNest Works</div>
+          <div class="section-sub">Land your dream job in just a few steps</div>
+        </div>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-icon">🔍</div>
+          <div class="step-num">01</div>
+          <h3>Search & Discover</h3>
+          <p>Browse thousands of curated job listings from top companies across India.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">📝</div>
+          <div class="step-num">02</div>
+          <h3>Create Profile</h3>
+          <p>Sign up and build your professional profile to stand out to employers.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">🚀</div>
+          <div class="step-num">03</div>
+          <h3>Apply in Minutes</h3>
+          <p>Submit tailored applications with cover letters directly through our platform.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">🎉</div>
+          <div class="step-num">04</div>
+          <h3>Get Hired</h3>
+          <p>Track your applications and land your dream role at a world-class company.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPANIES STRIP -->
+    <div class="section" style="padding-top:0;">
+      <div class="section-header">
+        <div>
+          <div class="section-tag">Partners</div>
+          <div class="section-title">Top Hiring Companies</div>
+          <div class="section-sub">Join industry leaders across sectors</div>
+        </div>
+        <button class="btn-outline" onclick="showPage('companies')" id="btn-all-companies">All Companies →</button>
+      </div>
+      <div class="companies-grid" id="home-companies">
+        <div class="skeleton-card" style="height:160px;"></div>
+        <div class="skeleton-card" style="height:160px;"></div>
+        <div class="skeleton-card" style="height:160px;"></div>
+        <div class="skeleton-card" style="height:160px;"></div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="logo" style="cursor:default;">Career<span>Nest</span></div>
+            <p>India's premier job portal connecting talented professionals with world-class companies since 2001.</p>
+            <div class="footer-socials">
+              <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+              <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+              <a href="#" class="social-link" aria-label="Instagram">📸</a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>For Job Seekers</h4>
+            <a onclick="showPage('jobs')" role="button" tabindex="0">Browse Jobs</a>
+            <a href="#" role="button" tabindex="0">Career Advice</a>
+            <a href="#" role="button" tabindex="0">Resume Builder</a>
+            <a href="#" role="button" tabindex="0">Salary Guide</a>
+          </div>
+          <div class="footer-col">
+            <h4>For Employers</h4>
+            <a onclick="showPage('admin')" role="button" tabindex="0">Post a Job</a>
+            <a href="#" role="button" tabindex="0">Talent Search</a>
+            <a href="#" role="button" tabindex="0">Pricing Plans</a>
+            <a href="#" role="button" tabindex="0">Recruitment</a>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="#" role="button" tabindex="0">About Us</a>
+            <a href="#" role="button" tabindex="0">Blog</a>
+            <a href="#" role="button" tabindex="0">Careers</a>
+            <a href="#" role="button" tabindex="0">Contact</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 CareerNest. All rights reserved.</p>
+          <p>
+            <a href="#" role="button" tabindex="0">Privacy Policy</a>
+            ·
+            <a href="#" role="button" tabindex="0">Terms of Service</a>
+            ·
+            <a href="#" role="button" tabindex="0">Cookie Policy</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ==================== JOBS PAGE ==================== -->
+  <div class="page" id="page-jobs">
+    <div class="section">
+      <div class="jobs-page-header">
+        <div>
+          <h1 class="section-title">Find Your Next Role</h1>
+          <p style="color:var(--text-muted);margin-top:6px;">Explore <span id="jobs-total-count">0</span> open positions
+            across India</p>
+        </div>
+      </div>
+      <div class="search-bar">
+        <span class="search-bar-icon">🔍</span>
+        <input type="text" id="jobs-search" placeholder="Search by job title, company, skill, or location..."
+          oninput="debounceRenderJobsPage()" autocomplete="off">
+        <button class="btn-primary" onclick="renderJobsPage()" id="btn-jobs-search">Search</button>
+      </div>
+      <div class="search-layout">
+        <!-- Sidebar -->
+        <div class="search-sidebar" id="jobs-sidebar">
+          <div class="sidebar-header">
+            <h3>Filters</h3>
+            <button class="clear-filters-link" onclick="clearFilters()" id="btn-clear-filters">Clear all</button>
+          </div>
+
+          <div class="filter-group">
+            <h4>Job Type</h4>
+            <div class="checkbox-item"><input type="checkbox" id="ft-full" onchange="renderJobsPage()"><label
+                for="ft-full">Full-time</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="ft-part" onchange="renderJobsPage()"><label
+                for="ft-part">Part-time</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="ft-remote" onchange="renderJobsPage()"><label
+                for="ft-remote">Remote</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="ft-hybrid" onchange="renderJobsPage()"><label
+                for="ft-hybrid">Hybrid</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="ft-intern" onchange="renderJobsPage()"><label
+                for="ft-intern">Internship</label></div>
+          </div>
+
+          <div class="filter-group">
+            <h4>Category</h4>
+            <div class="checkbox-item"><input type="checkbox" id="cat-tech" onchange="renderJobsPage()"><label
+                for="cat-tech">Technology</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="cat-fin" onchange="renderJobsPage()"><label
+                for="cat-fin">Finance</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="cat-mkt" onchange="renderJobsPage()"><label
+                for="cat-mkt">Marketing</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="cat-des" onchange="renderJobsPage()"><label
+                for="cat-des">Design</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="cat-hr" onchange="renderJobsPage()"><label
+                for="cat-hr">Human Resources</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="cat-health" onchange="renderJobsPage()"><label
+                for="cat-health">Healthcare</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="cat-ops" onchange="renderJobsPage()"><label
+                for="cat-ops">Operations</label></div>
+          </div>
+
+          <div class="filter-group">
+            <h4>Location</h4>
+            <div class="checkbox-item"><input type="checkbox" id="loc-pune" onchange="renderJobsPage()"><label
+                for="loc-pune">Pune</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="loc-mumbai" onchange="renderJobsPage()"><label
+                for="loc-mumbai">Mumbai</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="loc-blr" onchange="renderJobsPage()"><label
+                for="loc-blr">Bangalore</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="loc-delhi" onchange="renderJobsPage()"><label
+                for="loc-delhi">Delhi NCR</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="loc-hyd" onchange="renderJobsPage()"><label
+                for="loc-hyd">Hyderabad</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="loc-remote" onchange="renderJobsPage()"><label
+                for="loc-remote">Remote</label></div>
+          </div>
+
+          <div class="filter-group">
+            <h4>Experience Level</h4>
+            <div class="checkbox-item"><input type="checkbox" id="exp-fresh" onchange="renderJobsPage()"><label
+                for="exp-fresh">Fresher (0-1 yr)</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="exp-junior" onchange="renderJobsPage()"><label
+                for="exp-junior">Junior (1-3 yrs)</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="exp-mid" onchange="renderJobsPage()"><label
+                for="exp-mid">Mid-level (3-6 yrs)</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="exp-senior" onchange="renderJobsPage()"><label
+                for="exp-senior">Senior (6-10 yrs)</label></div>
+            <div class="checkbox-item"><input type="checkbox" id="exp-lead" onchange="renderJobsPage()"><label
+                for="exp-lead">Lead (10+ yrs)</label></div>
+          </div>
+        </div>
+
+        <!-- Job Listings -->
+        <div class="jobs-main">
+          <div class="jobs-toolbar">
+            <div id="jobs-count" class="jobs-count-label"></div>
+            <div class="jobs-sort">
+              <label for="jobs-sort-select" class="sr-only">Sort by</label>
+              <select id="jobs-sort-select" onchange="renderJobsPage()" class="sort-select" aria-label="Sort jobs">
+                <option value="newest">Newest First</option>
+                <option value="salary_high">Highest Salary</option>
+                <option value="salary_low">Lowest Salary</option>
+              </select>
+            </div>
+          </div>
+          <div class="jobs-grid" id="jobs-list" aria-label="Job listings">
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== COMPANIES PAGE ==================== -->
+  <div class="page" id="page-companies">
+    <div class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-tag">Explore</div>
+          <div class="section-title">Top Companies Hiring</div>
+          <div class="section-sub">Explore companies and discover their culture</div>
+        </div>
+      </div>
+      <!-- Company Filter -->
+      <div class="search-bar" style="margin-bottom:32px;">
+        <span class="search-bar-icon">🏢</span>
+        <input type="text" id="companies-search" placeholder="Search companies by name or sector..."
+          oninput="filterCompanies()" autocomplete="off">
+      </div>
+      <div class="companies-grid-full" id="all-companies" aria-label="Company listings">
+        <div class="skeleton-card" style="height:220px;"></div>
+        <div class="skeleton-card" style="height:220px;"></div>
+        <div class="skeleton-card" style="height:220px;"></div>
+        <div class="skeleton-card" style="height:220px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== DASHBOARD PAGE ==================== -->
+  <div class="page" id="page-dashboard">
+    <div class="section">
+      <div class="dash-header">
+        <div>
+          <h1 class="section-title" id="dash-title">My Dashboard</h1>
+          <p style="color:var(--text-muted);margin-top:6px;">Track your applications and saved jobs</p>
+        </div>
+      </div>
+      <div class="dash-grid" id="dash-stats"></div>
+
+      <div class="dash-tabs">
+        <button class="dash-tab active" onclick="switchDashTab(this,'applications')" id="tab-applications">📨
+          Applications</button>
+        <button class="dash-tab" onclick="switchDashTab(this,'saved')" id="tab-saved">★ Saved Jobs</button>
+      </div>
+
+      <!-- Applications Tab -->
+      <div class="dash-panel active" id="dash-applications">
+        <div class="table-wrapper">
+          <table class="app-table" id="applications-table" aria-label="My Applications">
+            <thead>
+              <tr>
+                <th>Job Title</th>
+                <th>Company</th>
+                <th>Applied On</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="applications-body">
+              <tr>
+                <td colspan="4" style="text-align:center;padding:40px;color:var(--text-muted);">Loading applications...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Saved Jobs Tab -->
+      <div class="dash-panel" id="dash-saved">
+        <div class="jobs-grid" id="saved-jobs-list" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr));"
+          aria-label="Saved jobs"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== ADMIN PAGE ==================== -->
+  <div class="page" id="page-admin">
+    <div class="section">
+      <div class="admin-header">
+        <div>
+          <h1 class="section-title">Admin Panel</h1>
+          <p style="color:var(--text-muted);margin-top:6px;">Manage jobs, applications, and companies</p>
+        </div>
+        <div class="admin-breadcrumb" id="admin-breadcrumb">Dashboard</div>
+      </div>
+      <div class="admin-layout">
+        <div class="admin-sidebar" role="navigation" aria-label="Admin navigation">
+          <div class="admin-sidebar-title">Management</div>
+          <div class="admin-nav-item active" onclick="switchAdmin(this,'post-job')" id="anav-post-job">
+            <span class="anav-icon">📋</span> Post New Job
+          </div>
+          <div class="admin-nav-item" onclick="switchAdmin(this,'manage-jobs')" id="anav-manage-jobs">
+            <span class="anav-icon">💼</span> Manage Jobs
+          </div>
+          <div class="admin-nav-item" onclick="switchAdmin(this,'applications')" id="anav-applications">
+            <span class="anav-icon">📨</span> All Applications
+          </div>
+          <div class="admin-nav-item" onclick="switchAdmin(this,'add-company')" id="anav-add-company">
+            <span class="anav-icon">🏢</span> Add Company
+          </div>
+          <div class="admin-nav-item" onclick="switchAdmin(this,'analytics')" id="anav-analytics">
+            <span class="anav-icon">📊</span> Analytics
+          </div>
+        </div>
+
+        <div class="admin-panel">
+
+          <!-- POST JOB -->
+          <div class="admin-section active" id="admin-post-job">
+            <h2 class="admin-section-title">Post a New Job</h2>
+            <div class="admin-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="a-title">Job Title *</label>
+                  <input type="text" id="a-title" placeholder="e.g. Senior Software Engineer">
+                </div>
+                <div class="form-group">
+                  <label for="a-company">Company *</label>
+                  <select id="a-company" aria-label="Select company"></select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="a-location">Location *</label>
+                  <select id="a-location" aria-label="Select location">
+                    <option>Pune</option>
+                    <option>Mumbai</option>
+                    <option>Bangalore</option>
+                    <option>Delhi NCR</option>
+                    <option>Hyderabad</option>
+                    <option>Chennai</option>
+                    <option>Remote</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="a-category">Category *</label>
+                  <select id="a-category" aria-label="Select category">
+                    <option>Technology</option>
+                    <option>Finance</option>
+                    <option>Marketing</option>
+                    <option>Design</option>
+                    <option>Human Resources</option>
+                    <option>Healthcare</option>
+                    <option>Operations</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="a-type">Job Type</label>
+                  <select id="a-type" aria-label="Select job type">
+                    <option>Full-time</option>
+                    <option>Part-time</option>
+                    <option>Remote</option>
+                    <option>Hybrid</option>
+                    <option>Internship</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="a-exp">Experience Level</label>
+                  <select id="a-exp" aria-label="Select experience level">
+                    <option>Fresher (0-1 yr)</option>
+                    <option>Junior (1-3 yrs)</option>
+                    <option>Mid-level (3-6 yrs)</option>
+                    <option>Senior (6-10 yrs)</option>
+                    <option>Lead (10+ yrs)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="a-sal-min">Min Salary (LPA)</label>
+                  <input type="number" id="a-sal-min" placeholder="e.g. 8" min="0" step="0.5">
+                </div>
+                <div class="form-group">
+                  <label for="a-sal-max">Max Salary (LPA)</label>
+                  <input type="number" id="a-sal-max" placeholder="e.g. 15" min="0" step="0.5">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="a-skills">Required Skills (comma-separated)</label>
+                <input type="text" id="a-skills" placeholder="e.g. React, Node.js, SQL">
+              </div>
+              <div class="form-group">
+                <label for="a-desc">Job Description *</label>
+                <textarea id="a-desc"
+                  placeholder="Describe the role, responsibilities, and what makes this opportunity exciting..."></textarea>
+              </div>
+              <div class="form-group">
+                <label for="a-req">Requirements</label>
+                <textarea id="a-req" placeholder="List key requirements and qualifications..."></textarea>
+              </div>
+              <div class="form-group">
+                <label for="a-benefits">Benefits & Perks</label>
+                <textarea id="a-benefits"
+                  placeholder="Health insurance, flexible hours, remote work options..."></textarea>
+              </div>
+              <div class="form-group form-check-group">
+                <input type="checkbox" id="a-urgent">
+                <label class="check-label" for="a-urgent">Mark as Urgent Hiring</label>
+              </div>
+              <div class="form-actions">
+                <button class="btn-success" onclick="postJob()" id="btn-post-job-submit">✓ Post Job Listing</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- MANAGE JOBS -->
+          <div class="admin-section" id="admin-manage-jobs">
+            <div class="admin-section-header">
+              <h2 class="admin-section-title">Manage Job Listings</h2>
+              <span class="admin-count-badge" id="manage-jobs-count">0 jobs</span>
+            </div>
+            <div class="table-wrapper">
+              <table class="app-table" style="min-width:600px;" aria-label="Manage Jobs">
+                <thead>
+                  <tr>
+                    <th>Job Title</th>
+                    <th>Company</th>
+                    <th>Category</th>
+                    <th>Posted</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="manage-jobs-body">
+                  <tr>
+                    <td colspan="5" style="text-align:center;padding:40px;color:var(--text-muted);">Loading...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- APPLICATIONS ADMIN -->
+          <div class="admin-section" id="admin-applications">
+            <div class="admin-section-header">
+              <h2 class="admin-section-title">All Applications</h2>
+              <span class="admin-count-badge" id="admin-apps-count">0 applications</span>
+            </div>
+            <div class="table-wrapper">
+              <table class="app-table" style="min-width:700px;" aria-label="All Applications">
+                <thead>
+                  <tr>
+                    <th>Applicant</th>
+                    <th>Email</th>
+                    <th>Job Title</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-apps-body">
+                  <tr>
+                    <td colspan="6" style="text-align:center;padding:40px;color:var(--text-muted);">Loading...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ADD COMPANY -->
+          <div class="admin-section" id="admin-add-company">
+            <h2 class="admin-section-title">Add New Company</h2>
+            <div class="admin-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="c-name">Company Name *</label>
+                  <input type="text" id="c-name" placeholder="e.g. TechCorp India">
+                </div>
+                <div class="form-group">
+                  <label for="c-sector">Sector *</label>
+                  <select id="c-sector" aria-label="Select sector">
+                    <option>Technology</option>
+                    <option>Finance</option>
+                    <option>E-Commerce</option>
+                    <option>Healthcare</option>
+                    <option>Manufacturing</option>
+                    <option>Consulting</option>
+                    <option>Media</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="c-hq">Headquarters</label>
+                  <input type="text" id="c-hq" placeholder="e.g. Pune, Maharashtra">
+                </div>
+                <div class="form-group">
+                  <label for="c-size">Company Size</label>
+                  <select id="c-size" aria-label="Select company size">
+                    <option>1-50</option>
+                    <option>51-200</option>
+                    <option>201-1000</option>
+                    <option>1000-5000</option>
+                    <option>5000+</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="c-about">About the Company</label>
+                <textarea id="c-about"
+                  placeholder="Brief description of the company, its mission and culture..."></textarea>
+              </div>
+              <div class="form-actions">
+                <button class="btn-success" onclick="addCompany()" id="btn-add-company">+ Add Company</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ANALYTICS -->
+          <div class="admin-section" id="admin-analytics">
+            <h2 class="admin-section-title">Analytics Overview</h2>
+            <div class="dash-grid" id="admin-stats"></div>
+            <div class="analytics-charts">
+              <div class="chart-card">
+                <h3>Jobs by Category</h3>
+                <div id="cat-bars"></div>
+              </div>
+              <div class="chart-card">
+                <h3>Application Status</h3>
+                <div id="status-bars"></div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end admin-panel -->
+      </div><!-- end admin-layout -->
+    </div>
+  </div>
+
+  <!-- ==================== LOGIN PAGE ==================== -->
+  <div class="page" id="page-login">
+    <div class="auth-page-wrapper">
+      <div class="auth-card">
+        <div class="auth-card-logo">Career<span>Nest</span></div>
+        <h1 class="auth-title">Welcome Back</h1>
+        <p class="auth-subtitle">Sign in to continue your job search</p>
+        <div class="admin-form">
+          <div class="form-group">
+            <label for="login-email">Email Address *</label>
+            <input type="email" id="login-email" placeholder="your@email.com" autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password *</label>
+            <div class="password-wrapper">
+              <input type="password" id="login-password" placeholder="Your password" autocomplete="current-password">
+              <button type="button" class="toggle-password" onclick="togglePwd('login-password',this)"
+                aria-label="Toggle password visibility">👁</button>
+            </div>
+          </div>
+          <button class="btn-primary auth-btn" onclick="loginUser()" id="btn-login-submit">Sign In</button>
+          <p class="auth-switch">Don't have an account? <a onclick="showPage('signup')" role="button" tabindex="0">Sign
+              up free</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SIGNUP PAGE ==================== -->
+  <div class="page" id="page-signup">
+    <div class="auth-page-wrapper">
+      <div class="auth-card">
+        <div class="auth-card-logo">Career<span>Nest</span></div>
+        <h1 class="auth-title">Create Account</h1>
+        <p class="auth-subtitle">Join CareerNest and find your dream job</p>
+        <div class="admin-form">
+          <div class="form-group">
+            <label for="signup-name">Full Name *</label>
+            <input type="text" id="signup-name" placeholder="Your full name" autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="signup-email">Email Address *</label>
+            <input type="email" id="signup-email" placeholder="your@email.com" autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="signup-password">Password *</label>
+            <div class="password-wrapper">
+              <input type="password" id="signup-password" placeholder="Create a strong password"
+                autocomplete="new-password">
+              <button type="button" class="toggle-password" onclick="togglePwd('signup-password',this)"
+                aria-label="Toggle password visibility">👁</button>
+            </div>
+          </div>
+          <button class="btn-primary auth-btn" onclick="signupUser()" id="btn-signup-submit">Create Account</button>
+          <p class="auth-switch">Already have an account? <a onclick="showPage('login')" role="button" tabindex="0">Sign
+              in</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== JOB DETAIL MODAL ==================== -->
+  <div class="modal-overlay" id="job-modal" onclick="closeModal(event)" role="dialog" aria-modal="true"
+    aria-labelledby="modal-job-title">
+    <div class="modal" id="modal-content">
+      <div class="modal-header" id="modal-header"></div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="apply-section">
+        <div class="apply-form" id="apply-form"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TOAST ==================== -->
+  <div class="toast" id="toast" role="alert" aria-live="polite">
+    <span class="toast-icon" id="toast-icon">✓</span>
+    <span id="toast-msg">Success!</span>
+  </div>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay" onclick="toggleMobileNav()"></div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
